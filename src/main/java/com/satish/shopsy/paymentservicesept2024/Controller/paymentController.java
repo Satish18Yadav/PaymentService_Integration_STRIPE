@@ -1,10 +1,12 @@
 package com.satish.shopsy.paymentservicesept2024.Controller;
 
+import com.razorpay.RazorpayException;
 import com.satish.shopsy.paymentservicesept2024.DTO.PaymentRequestDTO;
 import com.satish.shopsy.paymentservicesept2024.DTO.PaymentResponseDTO;
 import com.satish.shopsy.paymentservicesept2024.Service.PaymentGatewayService;
 import com.satish.shopsy.paymentservicesept2024.model.PaymentResponse;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,7 +26,7 @@ public class paymentController {
         this.razorpayService = razorpayService;
     }
     @PostMapping("/payment/customer")
-    public PaymentResponseDTO makePayment(@RequestBody PaymentRequestDTO paymentDto) {
+    public PaymentResponseDTO makePayment(@RequestBody PaymentRequestDTO paymentDto) throws JSONException, RazorpayException {
 
         if(isValid(paymentDto)){
             try{
